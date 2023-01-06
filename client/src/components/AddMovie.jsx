@@ -14,7 +14,7 @@ const AddMovie = ({handleAdd}) => {
   return (
     <div>
       <input value={name} placeholder="Add your movie" onChange={(e) => setName(e.target.value)} />
-      <button onClick={handleAddMovie}>Go</button>
+      <button onClick={handleAddMovie}>Add</button>
     </div>
   )
 
