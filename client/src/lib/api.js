@@ -1,11 +1,13 @@
 // TMDB login user: dztesthr , pw: 12345678
 import { API_KEY } from '../config/config.js'
 
+const server = 'http://127.0.0.1:3000/movies'
+
 const getMovies = async() => {
   let search
-  const res = await fetch(`https://api.themoviedb.org/3/movie/550?api_key=${API_KEY}&query=fight`)
+  const res = await fetch(server)
   const movies = await res.json()
-  console.log(movies)
+  // console.log(movies, 'here')
   return movies
 };
 
