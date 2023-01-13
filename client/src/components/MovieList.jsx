@@ -7,11 +7,11 @@ import getMovies from '../lib/api.js'
 
 const MovieList = () => {
   const [movies, setMovies] = React.useState([
-    {title: 'Mean Girls', display: false, watched: false},
-    {title: 'Hackers', display: false, watched: false},
-    {title: 'The Grey', display: false, watched: false},
-    {title: 'Sunshine', display: false, watched: false},
-    {title: 'Ex Machina', display: false, watched: false},
+    {title: 'Mean Girls', watched: false},
+    {title: 'Hackers', watched: false},
+    {title: 'The Grey', watched: false},
+    {title: 'Sunshine', watched: false},
+    {title: 'Ex Machina', watched: false},
   ])
   const [query, setQuery] = React.useState('')
   const [tab, setTab] = React.useState(false)
@@ -24,17 +24,13 @@ const MovieList = () => {
     setMovies([...movies, movie])
   }
 
-  const handleView = (name, key) => {
-    // const list = movies.map((i) => {
-    //   if (i.title === name) {
-    //     i[key] = !i[key]
-    //     if (key === 'watched') {
-    //       i.display = !i.display
-    //     }
-    //   }
-    //   return i
-    // })
-    const list = movies.map((i) => i.title === name ? !i[key] : i)
+  const handleView = (name) => {
+    const list = movies.map((i) => {
+      if (i.title === name) {
+       i.watched = !i.watched
+      }
+      return i
+    })
     setMovies(list)
   }
 
