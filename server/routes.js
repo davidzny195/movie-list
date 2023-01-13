@@ -1,8 +1,8 @@
-const controller = require('./controller')
+const controllers = require('./controllers')
 const router = require('express').Router()
 
-router.get('/list', controller.movies.get);
+router.get('/list', controllers.movies.get);
 
-router.post('/list', controller.movies.post);
+router.post('/list', controllers.movies.post);
 
 module.exports = router
