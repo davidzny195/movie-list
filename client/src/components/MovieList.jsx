@@ -6,13 +6,7 @@ import getMovies from '../lib/api.js'
 
 
 const MovieList = () => {
-  const [movies, setMovies] = React.useState([
-    {title: 'Mean Girls', watched: false},
-    {title: 'Hackers', watched: false},
-    {title: 'The Grey', watched: false},
-    {title: 'Sunshine', watched: false},
-    {title: 'Ex Machina', watched: false},
-  ])
+  const [movies, setMovies] = React.useState([])
   const [query, setQuery] = React.useState('')
   const [tab, setTab] = React.useState(false)
 
@@ -34,8 +28,9 @@ const MovieList = () => {
     setMovies(list)
   }
 
-  const populateMovies = () => {
-    getMovies()
+  const populateMovies = async () => {
+    const res = await getMovies()
+    setMovies(res)
   }
 
   React.useEffect(() => {
@@ -50,7 +45,7 @@ const MovieList = () => {
         <Search handleSearch={handleSearch}/>
       </div>
       <div>
-        {movies.length ? movies.filter((item) => item.title.includes(query) && item.watched === tab).map((movie, idx) => {
+        {movies.length ? movies.filter((item) => item.title.includes(query) && (!!item.watched  === tab)).map((movie, idx) => {
           return <MovieEntry movie={movie} key={idx} handleView={handleView} />
         }) : <p>no movies found</p>}
       </div>

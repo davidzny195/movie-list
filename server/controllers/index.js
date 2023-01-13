@@ -12,6 +12,6 @@ module.exports = {
       models.movies.post(req.body, (err, results) => {
         res.json(results)
       })
-    }
+    },
   },
 }
