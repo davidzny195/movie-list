@@ -2,7 +2,7 @@ import React from 'react';
 import Search from './Search.jsx'
 import MovieEntry from './MovieEntry.jsx'
 import AddMovie from './AddMovie.jsx'
-import getMovies from '../lib/api.js'
+import { getMovies } from '../lib/api.js'
 
 
 const MovieList = () => {
@@ -12,10 +12,6 @@ const MovieList = () => {
 
   const handleSearch = (query) => {
     setQuery(query)
-  }
-
-  const handleAdd = (movie) => {
-    setMovies([...movies, movie])
   }
 
   const handleView = (name) => {
@@ -39,14 +35,14 @@ const MovieList = () => {
 
     return (
       <div style={{paddingTop: '60px'}}>
-      <AddMovie handleAdd={handleAdd} />
+      <AddMovie handleAdd={populateMovies} />
       <div style={{display: 'flex'}}>
         <button onClick={() => setTab(!tab)}>{tab ? 'Watched' : 'To Watch'}</button>
         <Search handleSearch={handleSearch}/>
       </div>
       <div>
         {movies.length ? movies.filter((item) => item.title.includes(query) && (!!item.watched  === tab)).map((movie, idx) => {
-          return <MovieEntry movie={movie} key={idx} handleView={handleView} />
+          return <MovieEntry movie={movie} key={idx} handleView={handleView} handleUpdate={populateMovies} />
         }) : <p>no movies found</p>}
       </div>
     </div>

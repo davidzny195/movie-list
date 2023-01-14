@@ -13,16 +13,16 @@ module.exports = {
     },
 
     post: function (params, callback) {
-      db.query(
-        `INSERT INTO movie_list (title, description) VALUES("${params.title}", "${params.description}")`,
-        (err) => {
-          if (err) {
-            callback(err)
-          } else {
-            callback(null, 'Movie created')
-          }
-        }
-      )
+      // db.query(
+      //   `INSERT INTO movie_list (title, description) VALUES("${params.title}", "${params.description}")`,
+      //   (err) => {
+      //     if (err) {
+      //       callback(err)
+      //     } else {
+      //       callback(null, 'Movie created')
+      //     }
+      //   }
+      // )
     }
   },
 }
