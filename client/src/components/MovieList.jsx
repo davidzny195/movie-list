@@ -14,16 +14,6 @@ const MovieList = () => {
     setQuery(query)
   }
 
-  const handleView = (name) => {
-    const list = movies.map((i) => {
-      if (i.title === name) {
-       i.watched = !i.watched
-      }
-      return i
-    })
-    setMovies(list)
-  }
-
   const populateMovies = async () => {
     const res = await getMovies()
     setMovies(res)
@@ -33,7 +23,7 @@ const MovieList = () => {
     populateMovies()
   }, [])
 
-    return (
+  return (
       <div style={{paddingTop: '60px'}}>
       <AddMovie handleAdd={populateMovies} />
       <div style={{display: 'flex'}}>
@@ -42,7 +32,7 @@ const MovieList = () => {
       </div>
       <div>
         {movies.length ? movies.filter((item) => item.title.includes(query) && (!!item.watched  === tab)).map((movie, idx) => {
-          return <MovieEntry movie={movie} key={idx} handleView={handleView} handleUpdate={populateMovies} />
+          return <MovieEntry movie={movie} key={idx} handleView={populateMovies} handleUpdate={populateMovies} />
         }) : <p>no movies found</p>}
       </div>
     </div>

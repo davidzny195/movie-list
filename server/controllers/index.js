@@ -10,10 +10,13 @@ module.exports = {
 
       // sequelize
       try {
-        const movies = await Movie.findAll()
-          res.json(movies)
+        const movies = await Movie.findAll({
+          // doesn't return watched unless I specify it in attributes?
+          attributes: ['id', 'title', 'description', 'watched']
+        })
+        return res.json(movies)
       } catch (err) {
-        console.log(err)
+        res.sendStatus(400)
       }
     },
 
@@ -40,10 +43,26 @@ module.exports = {
         await Movie.destroy({
           where: { id: req.body.id }
         })
-        res.sendStatus(200)
+        res.sendStatus(204)
       } catch (err) {
         res.sendStatus(400)
       }
+    },
+
+    update: async function (req, res) {
+      const { id, watched } = req.body
+
+      try {
+        const update = await Movie.update(
+          { watched: !watched },
+          { where: { id: id }}
+        )
+        res.sendStatus(204)
+
+      } catch (error) {
+        res.sendStatus(400)
+      }
+
     }
   },
 }

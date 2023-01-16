@@ -1,6 +1,6 @@
 var mysql = require('mysql2');
 var Sequelize = require('Sequelize')
-var orm = new Sequelize('movies', 'root', '', {
+var orm = new Sequelize('movies', 'root', '12345678', {
   dialect: 'mysql',
   dialectOptions: {
     socketPath: '/tmp/mysql.sock'
@@ -12,7 +12,8 @@ var orm = new Sequelize('movies', 'root', '', {
 
 const Movie = orm.define('Movie', {
   title: Sequelize.STRING,
-  description: Sequelize.STRING
+  description: Sequelize.STRING,
+  watched: Sequelize.BOOLEAN
 })
 
 Movie.sync()

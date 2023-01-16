@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 //Routes
-app.use('/movies', router)
+app.use('/api', router)
 
 
 app.use(express.static('client/dist'));

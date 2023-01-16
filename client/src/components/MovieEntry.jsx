@@ -1,5 +1,5 @@
 import React from 'react';
-import { deleteMovie } from '../lib/api.js'
+import { deleteMovie, updateMovie } from '../lib/api.js'
 
 const MovieEntry = ({ movie, handleView, handleUpdate }) => {
   const [display, setDisplay] = React.useState(false)
@@ -7,6 +7,11 @@ const MovieEntry = ({ movie, handleView, handleUpdate }) => {
   const handleDelete = async () => {
     const res = await deleteMovie(movie.id)
     if (res) handleUpdate()
+  }
+
+  const handleWatch = async() => {
+    const res = await updateMovie(movie.id, movie.watched)
+    if (res) handleView()
   }
 
   return (
@@ -17,7 +22,7 @@ const MovieEntry = ({ movie, handleView, handleUpdate }) => {
         <p>{movie.description}</p>
 
         <button onClick={() => handleDelete()}>Delete</button>
-        <button onClick={() => handleView(movie.title, 'watched')} style={{height: '25px'}}>{ movie.watched ? 'Watched' : 'To Watch'}</button>
+        <button onClick={() => handleWatch()} style={{height: '25px'}}>{ movie.watched ? 'Watched' : 'To Watch'}</button>
       </div>
       }
     </div>

@@ -1,4 +1,4 @@
-const server = 'http://127.0.0.1:3000/movies/list'
+const server = 'http://127.0.0.1:3000/api/movies'
 
 const getMovies = async() => {
   const res = await fetch(server)
@@ -27,8 +27,21 @@ const deleteMovie = async(movieId) => {
     body: JSON.stringify({ id: movieId })
   })
 
-  if (res.status !== 200) return false
+  if (res.status !== 204) return false
   return true
 }
 
-export { getMovies, addMovie, deleteMovie };
+const updateMovie = async(movieId, watch) => {
+
+  const res = await fetch(server, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id: movieId, watched: !!watch })
+  })
+  if (res.status !== 204) return false
+  return true
+}
+
+export { getMovies, addMovie, deleteMovie, updateMovie };
